@@ -5,16 +5,16 @@ export const getCats = async () => {
     const response = await api.get("/cats");
     return response.data;
   } catch (error) {
-    console.error("Error Getting ALL Cats!", error);
+    console.error("Error Getting all Cats: ", error);
   }
 };
 
 export const getCat = async (id) => {
   try {
-    const response = await api.get(`cats/${id}`);
+    const response = await api.get(`/cats/${id}`);
     return response.data;
   } catch (error) {
-    console.error("Error Getting Cat!", error);
+    console.error("Error Getting all Cat: ", error);
   }
 };
 

@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getCat, editCat } from "../services/cats.js";
 
-
 function CatEdit() {
   const [cat, setCat] = useState({
     name: "",
@@ -14,24 +13,26 @@ function CatEdit() {
     likesCuddles: true,
     image: "",
   });
-let { id } = useParams()
+
+  let { id } = useParams()
   let navigate = useNavigate();
 
- async function fetchCat() {
-  const oneCat = await getCat(id)
-  setCat(oneCat)
-}
+  async function fetchCat() {
+    const oneCat = await getCat(id)
+    setCat(oneCat)
+  }
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchCat()
-  }.[])
+  }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await createCat(cat);
-    navigate("/cats");
+    await editCat(id, cat);
+    navigate(`/cats/${id}`);
   };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -44,7 +45,7 @@ let { id } = useParams()
   const handleCheckboxChange = (e) => {
     const { name, checked } = e.target;
 
-    setCat()((prevCat) => ({
+    setCat((prevCat) => ({
       ...prevCat,
       [name]: checked,
     }));
@@ -53,7 +54,7 @@ let { id } = useParams()
   return (
     <div>
       <h1>Add a cute cat in our Database!</h1>
-      <form onSubmit={{ handleSubmit }}>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Please add your cat's name"

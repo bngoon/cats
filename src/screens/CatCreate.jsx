@@ -22,6 +22,7 @@ function CatCreate() {
     await createCat(cat);
     navigate("/cats");
   };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -34,7 +35,7 @@ function CatCreate() {
   const handleCheckboxChange = (e) => {
     const { name, checked } = e.target;
 
-    setCat()((prevCat) => ({
+    setCat((prevCat) => ({
       ...prevCat,
       [name]: checked,
     }));
@@ -43,7 +44,7 @@ function CatCreate() {
   return (
     <div>
       <h1>Add a cute cat in our Database!</h1>
-      <form onSubmit={{ handleSubmit }}>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Please add your cat's name"
