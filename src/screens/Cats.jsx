@@ -20,7 +20,7 @@ function Cats() {
      <div className="cats-containter">
     {
       cats.map((cat)=> (
-      <Cat cat={cat}/>
+      <Cat cat={cat} key={cat._id}/>
       ))
     }
 
